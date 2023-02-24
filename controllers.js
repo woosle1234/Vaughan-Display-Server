@@ -78,7 +78,9 @@ const image = (req, res, next) => {
         if (err)
             res.json({Error: err})
         else{
-            res.render(path.join(__dirname, 'html', 'image.html'), {data: data});
+            
+            res.send(`<img class="img-fluid" style="width: 100%;" src="data:image/ ${data.image.contentType};base64,${data.image.data.toString('base64')} " alt="..." >`)
+            //res.render(path.join(__dirname, 'html', 'image.html'), {data: data});
         }
             
     })
