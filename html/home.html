@@ -38,13 +38,13 @@
                         <table class="table table-dark table-striped">
                         <% if(data.length>0) { %>
                             <% for(let i=0;i<data.length;i++) { %>
-                                <tr style="height:50vh">
+                                <tr>
                                     <td>
                                         <h3><%= data[i].position %></h3>
                                     </td>
                                     <td style="width: 30vw;">
                                         <a href="/image/<%= data[i]._id %>" >
-                                            <img class="img-fluid" src="data:image/ <%=data[i].image.contentType%>;base64,<%=data[i].image.data.toString('base64')%> " alt="..." >
+                                            <%= data[i].name  %>
                                         </a>
                                     </td>
                                     <td><button onclick="location.href='/moveup/<%= data[i]._id%>'" <% if(i==0){%> disabled <%}%>>Move Up</button></td>

@@ -5,6 +5,7 @@ const slideSchema = new mongoose.Schema({
         data: Buffer,
         contentType: String
     },
+    name: String,
     position: Number
 })
 

@@ -53,6 +53,7 @@ const upload = (req, res, next) => {
                         data: fs.readFileSync(path.join(tempraryImageDirectory,req.file.filename)),
                         contentType: 'image/png'
                     },
+                    name: req.file.filename,
                     position: pos
                 })
                 newSlide.save((err,d)=>{
