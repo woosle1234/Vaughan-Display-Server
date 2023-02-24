@@ -74,12 +74,21 @@ const image = (req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
 
     slide.findById(req.params.id,(err,data)=>{
-        
+        let tempraryImageDirectory;
+        if (process.env.DEV && process.env.DEV === 'Yes') {
+            tempraryImageDirectory = path.join(__dirname, `../../tmp/`);
+        } else {
+            tempraryImageDirectory = '/tmp/';
+        }
         if (err)
             res.json({Error: err})
         else{
-            
-            res.send(`<img class="img-fluid" style="width: 100%;" src="data:image/ ${data.image.contentType};base64,${data.image.data.toString('base64')} " alt="..." >`)
+            const buffer = Buffer.from(data.image.data, "base64");
+            const pathname = path.join(tempraryImageDirectory,data.name)
+            fs.writeFileSync(pathname, buffer);
+            res.sendFile(data.name, {root: tempraryImageDirectory})
+
+            //res.send(`<img class="img-fluid" style="width: 100%;" src="data:image/ ${data.image.contentType};base64,${data.image.data.toString('base64')} " alt="..." >`)
             //res.render(path.join(__dirname, 'html', 'image.html'), {data: data});
         }
             
