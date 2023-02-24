@@ -19,5 +19,7 @@ router.get('/images', displayController.all);
 router.get('/moveup/:id', displayController.moveup)
 
 router.get('/movedown/:id', displayController.movedown)
+
+router.get('/ids', displayController.ids)
  
 module.exports = router; // export to use in server.js

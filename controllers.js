@@ -72,11 +72,11 @@ const upload = (req, res, next) => {
 
 const image = (req, res, next) => {
     slide.findById(req.params.id,(err,data)=>{
+        
         if (err)
             res.json({Error: err})
         else{
-            console.log(data)
-            res.render(path.join(__dirname, 'html', 'image.html'),{data: data});
+            res.render(path.join(__dirname, 'html', 'image.html'), {data: data});
         }
             
     })
@@ -165,6 +165,16 @@ const movedown = (req, res, next)=>{
     })
 }
 
+const ids = (req, res, next)=>{
+    slide.find({},{_id:1},(err,data)=>{
+        if (err){
+            res.json({Error: err})
+        }else{
+            res.json(data)
+        }
+    }).sort({position: 1})
+}
+
 module.exports = {
     home,
     uploadFile,
@@ -173,5 +183,6 @@ module.exports = {
     deleteSlide,
     all,
     moveup,
-    movedown
+    movedown,
+    ids
 };
