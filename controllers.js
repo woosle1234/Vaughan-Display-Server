@@ -71,6 +71,8 @@ const upload = (req, res, next) => {
 }
 
 const image = (req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+
     slide.findById(req.params.id,(err,data)=>{
         
         if (err)
@@ -108,6 +110,8 @@ const deleteSlide = (req, res, next) => {
 }
 
 const all = (req, res, next)=>{
+    res.setHeader("Access-Control-Allow-Origin", "*");
+
     slide.find({},(err,data)=>{
         res.json(data);
     }).sort({position:1})
@@ -166,6 +170,8 @@ const movedown = (req, res, next)=>{
 }
 
 const ids = (req, res, next)=>{
+    res.setHeader("Access-Control-Allow-Origin", "*");
+
     slide.find({},{_id:1},(err,data)=>{
         if (err){
             res.json({Error: err})

@@ -28,6 +28,16 @@ let tempraryImageDirectory;
 
 const PORT = process.env.PORT || 3000;
 
+// Add Access Control Allow Origin headers
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin","*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
